@@ -21,4 +21,22 @@ public class MaintenanceIDao extends HibernateDaoSupport implements MaintananceD
 				.setParameter("userid", user.getUserid())
 				.list();
 	}
+
+	@Override
+	public void saveUser(InforUser user) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateUser(InforUser user) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeUser(InforUser user) {
+		// TODO Auto-generated method stub
+		
+	}
 }
