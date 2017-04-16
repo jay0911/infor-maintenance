@@ -12,4 +12,7 @@ public interface MaintananceDao {
 	public void removeUser(InforUser user);
 	
 	public List<InforRoles> selectRoles();
+	public void saveRegistration(InforUser user);
+	public void modifyUser(InforUser user);
+	public boolean isUsernameExisting(InforUser user);
 }

@@ -2,6 +2,7 @@ package com.infor.idao;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 import com.infor.dao.MaintananceDao;
@@ -12,15 +13,17 @@ import com.infor.models.InforUser;
 @Transactional
 public class MaintenanceIDao extends HibernateDaoSupport implements MaintananceDao{
 
-	private static final String USER_FETCH_HQL = "from InforUser where userid=:userid";
+	private static final String USER_FETCH_HQL = "from InforUser where username=:username";
 	private static final String ROLES_FETCH_HQL = "from InforRoles";
+	
+	private static final String USER_MODIFY_HQL = "update InforUser set firstname=:firstname, lastname=:lastname,contactnumber=:contactnumber, emailaddress=:emailaddress, inforaddress=:inforaddress,position=:position,gender=:gender,username=:username,password=:password where username=:username";
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<InforUser> getUser(InforUser user) {
 		// TODO Auto-generated method stub
 		return customSelectQuery(USER_FETCH_HQL)
-				.setParameter("userid", user.getUserid())
+				.setParameter("username", user.getUsername())
 				.list();
 	}
 
@@ -33,7 +36,17 @@ public class MaintenanceIDao extends HibernateDaoSupport implements MaintananceD
 	@Override
 	public void updateUser(InforUser user) {
 		// TODO Auto-generated method stub
-		
+		Query q= getSessionFactory().createQuery(USER_MODIFY_HQL);
+		q.setParameter("firstname", user.getFirstname());
+		q.setParameter("lastname", user.getLastname());
+		q.setParameter("contactnumber", user.getContactnumber());
+		q.setParameter("emailaddress", user.getEmailaddress());
+		q.setParameter("inforaddress", user.getInforaddress());
+		q.setParameter("position", user.getPosition());
+		q.setParameter("gender", user.getGender());
+		q.setParameter("username", user.getUsername());
+		q.setParameter("password", user.getPassword());
+		q.executeUpdate();
 	}
 
 	@Override
@@ -48,5 +61,29 @@ public class MaintenanceIDao extends HibernateDaoSupport implements MaintananceD
 		// TODO Auto-generated method stub
 		return customSelectQuery(ROLES_FETCH_HQL)
 				.list();
+	}
+
+	@Override
+	public void saveRegistration(InforUser user) {
+		// TODO Auto-generated method stub
+		getSessionFactory().save(user);
+	}
+
+	@Override
+	public void modifyUser(InforUser user) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean isUsernameExisting(InforUser user) {
+		List<InforUser> userlist = customSelectQuery(USER_FETCH_HQL)
+				.setParameter("username", user.getUsername())
+				.list();
+		if(userlist.size() > 0){
+			return true;
+		}
+		return false;
 	}
 }
