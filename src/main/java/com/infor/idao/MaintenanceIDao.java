@@ -6,6 +6,7 @@ import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 import com.infor.dao.MaintananceDao;
+import com.infor.dto.UserMaintenanceDTO;
 import com.infor.models.InforRoles;
 import com.infor.models.InforUser;
 
@@ -15,6 +16,7 @@ public class MaintenanceIDao extends HibernateDaoSupport implements MaintananceD
 
 	private static final String USER_FETCH_HQL = "from InforUser where username=:username";
 	private static final String ROLES_FETCH_HQL = "from InforRoles";
+	private static final String ROLES_DELETE_HQL = "delete from InforRoles where role=:role";
 	
 	private static final String USER_MODIFY_HQL = "update InforUser set firstname=:firstname, lastname=:lastname,contactnumber=:contactnumber, emailaddress=:emailaddress, inforaddress=:inforaddress,position=:position,gender=:gender,username=:username,password=:password where username=:username";
 	
@@ -85,5 +87,20 @@ public class MaintenanceIDao extends HibernateDaoSupport implements MaintananceD
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public void deleteRole(UserMaintenanceDTO dto) {
+		// TODO Auto-generated method stub
+		Query query = getSessionFactory().createQuery(ROLES_DELETE_HQL);
+	    query.setParameter("role", dto.getPosition());
+	    int deleted = query.executeUpdate();
+	    System.out.println("Deleted: " + deleted + " user(s)");
+	}
+
+	@Override
+	public void saveRole(InforRoles roles) {
+		// TODO Auto-generated method stub
+		getSessionFactory().save(roles);
 	}
 }

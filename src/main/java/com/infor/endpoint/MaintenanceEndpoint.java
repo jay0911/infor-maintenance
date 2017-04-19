@@ -65,4 +65,32 @@ public class MaintenanceEndpoint {
 		}
 		return response;
 	}
+	
+	@PostMapping("/deleterole")
+	public AjaxResponseBody deleterole(@RequestBody UserMaintenanceDTO dto){
+		AjaxResponseBody response = new AjaxResponseBody();
+		try{
+			s.deleteRole(dto);
+			response.setMsg("success");
+			response.setCode("200");
+		}catch(Exception e){
+			response.setMsg("failed");
+			response.setCode("400");
+		}
+		return response;
+	}
+	
+	@PostMapping("/saverole")
+	public AjaxResponseBody saverole(@RequestBody UserMaintenanceDTO dto){
+		AjaxResponseBody response = new AjaxResponseBody();
+		try{
+			s.saveRole(dto);
+			response.setMsg("success");
+			response.setCode("200");
+		}catch(Exception e){
+			response.setMsg("failed");
+			response.setCode("400");
+		}
+		return response;
+	}
 }

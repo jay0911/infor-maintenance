@@ -93,4 +93,18 @@ public class MaintenanceIService implements MaintenanceService{
 		this.updateUser(u);
 	}
 
+	@Override
+	public void deleteRole(UserMaintenanceDTO dto) {
+		// TODO Auto-generated method stub
+		md.deleteRole(dto);
+	}
+
+	@Override
+	public void saveRole(UserMaintenanceDTO dto) {
+		// TODO Auto-generated method stub
+		InforRoles role = new InforRoles();
+		role.setRole(dto.getPosition());
+		md.saveRole(role);
+	}
+
 }

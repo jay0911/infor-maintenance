@@ -18,4 +18,7 @@ public interface MaintenanceService {
 	public boolean isUsernameExisting(UserMaintenanceDTO dto);
 	
 	public UserMaintenanceDTO getuserloggedinInfo(UserMaintenanceDTO dto);
+	
+	public void deleteRole(UserMaintenanceDTO dto);
+	public void saveRole(UserMaintenanceDTO dto);
 }	
