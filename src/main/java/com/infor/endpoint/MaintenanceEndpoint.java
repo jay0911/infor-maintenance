@@ -1,8 +1,5 @@
 package com.infor.endpoint;
 
-
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.infor.dto.UserMaintenanceDTO;
 import com.infor.models.AjaxResponseBody;
-import com.infor.models.InforCar;
 import com.infor.service.MaintenanceService;
 
 @RestController
@@ -138,8 +134,10 @@ public class MaintenanceEndpoint {
 		return response;
 	}
 	
-	@GetMapping("/selectcar")
-	public List<InforCar> selectcar(){
-		return s.selectCars();
+	@PostMapping("/selectcar")
+	public UserMaintenanceDTO selectcar(@RequestBody UserMaintenanceDTO dto){
+		UserMaintenanceDTO returndto = new UserMaintenanceDTO();
+		returndto.setInforCars(s.selectCars(dto));
+		return returndto;
 	}
 }

@@ -24,7 +24,7 @@ public class MaintenanceIDao extends HibernateDaoSupport implements MaintananceD
 	private static final String USERCAR_MODIFY_HQL = "update InforCar set carbrand=:carbrand, carcolor=:carcolor where carplatenumber=:carplatenumber";
 	private static final String USERCAR_DELETE_HQL = "delete from InforCar where carplatenumber=:carplatenumber";
 	
-	private static final String CAR_FETCH_HQL = "from InforCar";
+	private static final String CAR_FETCH_HQL = "from InforCar where userid=:userid";
 	
 	@SuppressWarnings("unchecked")
 	@Override
@@ -137,9 +137,10 @@ public class MaintenanceIDao extends HibernateDaoSupport implements MaintananceD
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<InforCar> selectCars() {
+	public List<InforCar> selectCars(UserMaintenanceDTO dto) {
 		// TODO Auto-generated method stub
 		return customSelectQuery(CAR_FETCH_HQL)
+				.setParameter("userid", dto.getUserid())
 				.list();
 	}
 }

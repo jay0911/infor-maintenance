@@ -123,13 +123,10 @@ public class MaintenanceIService implements MaintenanceService{
 	public void saveCar(UserMaintenanceDTO dto) {
 		// TODO Auto-generated method stub
 		InforCar inforCar = new InforCar();
-		InforUser user = new InforUser();
-		user.setUserid(dto.getUserid());
 		inforCar.setCarbrand(dto.getCarbrand());
 		inforCar.setCarcolor(dto.getCarcolor());
 		inforCar.setCarplatenumber(dto.getCarplatenumber());
-		inforCar.setInforUser(user);
-		
+		inforCar.setUserid(dto.getUserid());
 		md.saveCar(inforCar);
 	}
 
@@ -144,9 +141,9 @@ public class MaintenanceIService implements MaintenanceService{
 	}
 
 	@Override
-	public List<InforCar> selectCars() {
+	public List<InforCar> selectCars(UserMaintenanceDTO dto) {
 		// TODO Auto-generated method stub
-		return md.selectCars();
+		return md.selectCars(dto);
 	}
 
 }

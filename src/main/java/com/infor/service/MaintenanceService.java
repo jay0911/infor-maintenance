@@ -26,5 +26,5 @@ public interface MaintenanceService {
 	public void deleteCar(UserMaintenanceDTO dto);
 	public void saveCar(UserMaintenanceDTO dto);
 	public void editCar(UserMaintenanceDTO dto);
-	public List<InforCar> selectCars();
+	public List<InforCar> selectCars(UserMaintenanceDTO dto);
 }	

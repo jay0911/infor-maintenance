@@ -24,5 +24,5 @@ public interface MaintananceDao {
 	public void deleteCar(UserMaintenanceDTO dto);
 	public void saveCar(InforCar inforCar);
 	public void editCar(InforCar inforCar);
-	public List<InforCar> selectCars();
+	public List<InforCar> selectCars(UserMaintenanceDTO dto);
 }
