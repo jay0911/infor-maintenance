@@ -7,10 +7,16 @@ import org.springframework.stereotype.Service;
 
 import com.infor.dao.MaintananceDao;
 import com.infor.dto.UserMaintenanceDTO;
+import com.infor.models.InforCar;
 import com.infor.models.InforRoles;
 import com.infor.models.InforUser;
 import com.infor.service.MaintenanceService;
-
+/**
+ * 
+ * @author joliveros
+ * @see InforUser
+ * @since 1.0
+ */
 @Service
 public class MaintenanceIService implements MaintenanceService{
 	
@@ -105,6 +111,42 @@ public class MaintenanceIService implements MaintenanceService{
 		InforRoles role = new InforRoles();
 		role.setRole(dto.getPosition());
 		md.saveRole(role);
+	}
+
+	@Override
+	public void deleteCar(UserMaintenanceDTO dto) {
+		// TODO Auto-generated method stub
+		md.deleteCar(dto);
+	}
+
+	@Override
+	public void saveCar(UserMaintenanceDTO dto) {
+		// TODO Auto-generated method stub
+		InforCar inforCar = new InforCar();
+		InforUser user = new InforUser();
+		user.setUserid(dto.getUserid());
+		inforCar.setCarbrand(dto.getCarbrand());
+		inforCar.setCarcolor(dto.getCarcolor());
+		inforCar.setCarplatenumber(dto.getCarplatenumber());
+		inforCar.setInforUser(user);
+		
+		md.saveCar(inforCar);
+	}
+
+	@Override
+	public void editCar(UserMaintenanceDTO dto) {
+		// TODO Auto-generated method stub
+		InforCar inforCar = new InforCar();
+		inforCar.setCarbrand(dto.getCarbrand());
+		inforCar.setCarcolor(dto.getCarcolor());
+		inforCar.setCarplatenumber(dto.getCarplatenumber());
+		md.editCar(inforCar);
+	}
+
+	@Override
+	public List<InforCar> selectCars() {
+		// TODO Auto-generated method stub
+		return md.selectCars();
 	}
 
 }

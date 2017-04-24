@@ -3,6 +3,7 @@ package com.infor.dao;
 import java.util.List;
 
 import com.infor.dto.UserMaintenanceDTO;
+import com.infor.models.InforCar;
 import com.infor.models.InforRoles;
 import com.infor.models.InforUser;
 
@@ -19,4 +20,9 @@ public interface MaintananceDao {
 	
 	public void deleteRole(UserMaintenanceDTO dto);
 	public void saveRole(InforRoles roles);
+	
+	public void deleteCar(UserMaintenanceDTO dto);
+	public void saveCar(InforCar inforCar);
+	public void editCar(InforCar inforCar);
+	public List<InforCar> selectCars();
 }
