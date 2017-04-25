@@ -114,7 +114,7 @@ public class MaintenanceIDao extends HibernateDaoSupport implements MaintananceD
 	public void deleteCar(UserMaintenanceDTO dto) {
 		// TODO Auto-generated method stub
 		Query query = getSessionFactory().createQuery(USERCAR_DELETE_HQL);
-	    query.setParameter("role", dto.getPassword());
+	    query.setParameter("carplatenumber", dto.getCarplatenumber());
 	    int deleted = query.executeUpdate();
 	    System.out.println("Deleted: " + deleted + " Cars(s)");
 	}
