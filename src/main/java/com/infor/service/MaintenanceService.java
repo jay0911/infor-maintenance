@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.infor.dto.UserMaintenanceDTO;
 import com.infor.models.InforCar;
+import com.infor.models.InforParking;
 import com.infor.models.InforRoles;
 import com.infor.models.InforUser;
 
@@ -27,4 +28,10 @@ public interface MaintenanceService {
 	public void saveCar(UserMaintenanceDTO dto);
 	public void editCar(UserMaintenanceDTO dto);
 	public List<InforCar> selectCars(UserMaintenanceDTO dto);
+	
+	public void deleteParking(UserMaintenanceDTO dto);
+	public void saveParking(UserMaintenanceDTO dto);
+	public void editParking(UserMaintenanceDTO dto);
+	public List<InforParking> selectParking(UserMaintenanceDTO dto);
+	
 }	

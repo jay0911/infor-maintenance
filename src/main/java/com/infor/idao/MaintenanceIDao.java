@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import com.infor.dao.MaintananceDao;
 import com.infor.dto.UserMaintenanceDTO;
 import com.infor.models.InforCar;
+import com.infor.models.InforParking;
 import com.infor.models.InforRoles;
 import com.infor.models.InforUser;
 
@@ -26,6 +27,9 @@ public class MaintenanceIDao extends HibernateDaoSupport implements MaintananceD
 	
 	private static final String CAR_FETCH_HQL = "from InforCar where userid=:userid";
 	
+	private static final String PARKING_FETCHALL_HQL = "from InforParking";
+	private static final String PARKING_MODIFY_HQL = "update InforParking set isparkingtandem=:isparkingtandem, tandemposition=:tandemposition, userid=:userid where parkingid=:parkingid";
+	private static final String PARKING_DELETE_HQL = "delete from InforParking where parkingid=:parkingid";
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<InforUser> getUser(InforUser user) {
@@ -141,6 +145,46 @@ public class MaintenanceIDao extends HibernateDaoSupport implements MaintananceD
 		// TODO Auto-generated method stub
 		return customSelectQuery(CAR_FETCH_HQL)
 				.setParameter("userid", dto.getUserid())
+				.list();
+	}
+
+	@Override
+	public void deleteParking(UserMaintenanceDTO dto) {
+		// TODO Auto-generated method stub
+		
+		Query query = getSessionFactory().createQuery(PARKING_DELETE_HQL);
+	    query.setParameter("parkingid", dto.getParkingid());
+	    int deleted = query.executeUpdate();
+	    System.out.println("Deleted: " + deleted + " ParkingInfo(s)");
+	}
+
+	@Override
+	public void saveParking(InforParking inforParking) {
+		// TODO Auto-generated method stub
+		getSessionFactory().save(inforParking);
+	}
+
+	@Override
+	public void editParking(InforParking inforParking) {
+		// TODO Auto-generated method stub
+		Query q= getSessionFactory().createQuery(PARKING_MODIFY_HQL);
+		q.setParameter("parkingid", inforParking.getParkingid());
+		q.setParameter("userid", inforParking.getUserid());
+		q.setParameter("isparkingtandem", inforParking.getIsparkingtandem());
+		q.setParameter("tandemposition", inforParking.getTandemposition());
+		q.executeUpdate();
+	}
+
+	@Override
+	public List<InforParking> selectParking(UserMaintenanceDTO dto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<InforParking> selectAllParking() {
+		return customSelectQuery(PARKING_FETCHALL_HQL)
 				.list();
 	}
 }

@@ -140,4 +140,12 @@ public class MaintenanceEndpoint {
 		returndto.setInforCars(s.selectCars(dto));
 		return returndto;
 	}
+	
+	
+	@PostMapping("/selectparking")
+	public UserMaintenanceDTO selectParking(@RequestBody UserMaintenanceDTO dto){
+		UserMaintenanceDTO returndto = new UserMaintenanceDTO();
+		returndto.setInforParkings(s.selectParking(dto));
+		return returndto;
+	}
 }
